@@ -1,0 +1,259 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./jequery_io.js"></script>
+    <style>
+      body {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        border: 1px solid rgb(80, 41, 13);
+        border-radius: 10px;
+      }
+
+      #quiz-container {
+        width: 50%;
+        margin: auto;
+      }
+
+      .question {
+        margin-bottom: 20px;
+      }
+    </style>
+    <script>
+      var questions = [
+        {
+          question: "What is the capital of France?",
+          options: ["Paris", "London", "Berlin", "Madrid"],
+          answer: "A",
+        },
+        {
+          question: "What is 2 + 2?",
+          options: ["3", "4", "5", "6"],
+          answer: "B",
+        },
+        {
+          question: "What is 3 + 2?",
+          options: ["3", "4", "5", "6"],
+          answer: "C",
+        },
+        
+      ];
+      $(document).ready(function () {
+        var currentQuestionIndex = 0;
+        var userAnswers = [];
+
+        function showQuestion(index) {
+          var question = questions[index];
+          var questionHtml = `<p>${question.question}</p>`;
+          for (var i = 0; i < question.options.length; i++) {
+                var optionLabel = String.fromCharCode( 65 + i);
+                questionHtml += `<input type="radio" name="q${index}" value="${optionLabel}"> ${optionLabel}. ${question.options[i]}<br>`;
+            }
+            document.getElementById("question-container").innerHTML = questionHtml;
+        }
+
+        $("#next-btn").click(function () {
+          var selectedAnswer = $(
+            `input[name='q${currentQuestionIndex}']:checked`
+          ).val();
+          if (selectedAnswer) {
+            userAnswers[currentQuestionIndex] = selectedAnswer;
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+              showQuestion(currentQuestionIndex);
+            } else {
+              $("#next-btn").hide();
+              $("#result-btn").show();
+            }
+          } else {
+            alert("Please select an answer.");
+          }
+        });
+
+        $("#result-btn").click(function () {  
+          var correctAnswers = 0;
+          questions.forEach((question, index) => {
+            if (userAnswers[index] === question.answer) {
+              correctAnswers++;
+            }
+          });
+          $("#result")
+            .html(
+              `You got ${correctAnswers} out of ${questions.length} correct!`
+            )
+            .show();
+        });
+
+        showQuestion(currentQuestionIndex);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="quiz-container">
+      <div id="question-container"></div>
+      <button id="next-btn">Next</button>
+      <button id="result-btn" style="display: none">View Result</button>
+      <div id="result" style="display: none"></div>
+    </div>
+  </body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  Examp Page  </title>
+    <script src="./jequery_io.js"></script>
+    <script>
+      const questions = [
+    {
+        id : "1",
+        que : "_______ is the smallest unit of data in a computer ?",
+        opA : "Gigabyte",
+        opB : "Bit",
+        opC : "Byte",
+        opD : "Terabyte ",
+        rightAns : "B"
+    },
+    {
+        id : "2",
+        que : "Which of the following is NOT an anti-virus software ?",
+        opA : "Avast",
+        opB : "Linux ",
+        opC : "Norton ",
+        opD : "Kaspersky  ",
+        rightAns : "B"
+    },
+    {
+        id : "3",
+        que : "In the context of digital computer, which of the following pairs of digits is referred to as binary code ?",
+        opA : "3 and 4 ",
+        opB : "3 and 5 ",
+        opC : "0 and 1   ",
+        opD : "9 and 4  ",
+        rightAns : "C"
+    },
+    {
+        id : "4",
+        que : "Which unit of the computer is considered as the brain of the computer ?",
+        opA : "Memory unit ",
+        opB : "Input unit ",
+        opC : "Output unit ",
+        opD : "CPU",
+        rightAns : "D"
+    },
+    {
+        id : "5",
+        que : "What is the full form of PROM ?",
+        opA : "Programmable read-only memory ",
+        opB : "Program read-only memory ",
+        opC : "Program read-output memory ",
+        opD : "Program random-output memory ",
+        rightAns : "A"
+    }
+]
+    </script>
+<style>
+  .container{
+      width: 90%;
+      margin: 0 auto;
+      border: 1px solid black;
+      background-color: rgb(216, 216, 216);
+      display: flex;
+      justify-content: space-around;
+      padding:  5px 0;
+  }
+  .container .question_panel{
+
+      width: 60%;
+      height: 600px;
+      background-color:  rgb(236, 236, 236);
+  }
+  .container .button_panel{
+      width: 35%;
+      height: 600px;
+      background-color:  rgb(236, 236, 236);
+      margin-top: 50px;
+   }
+   .que{
+      display: none;
+   }
+   .que_btn{
+      padding: 10px;
+      background-color: black;
+      border-radius: 5px;
+      color: white;
+      margin: 7px;
+   }
+   .prevBtn{
+      padding: 10px;
+      background-color: black;
+      border-radius: 5px;
+      color: white;
+      margin: 7px;
+      }
+</style> 
+
+
+<script>
+
+$(document).ready(function(){
+ str ="";
+ cnt = 1;
+ btn_str = "";
+
+  questions.forEach(element => {
+        str += '<div class="que" id="que'+element.id +'" data-srno='+ cnt +'> <p><B> '+ (cnt) +'. </B>'+ element.que +'<p> <p> A. '+  element.opA +' </p> <p> B. '+  element.opB +' </p> <p> C. '+  element.opC +' </p>  <p> D. '+  element.opD +' </p>   </div>';
+        btn_str+= "<a class='que_btn' id='btn"+element.id +"' data-btnsrno="+ cnt +">"+ (cnt++) +"</a>";
+      });
+$(".question_panel").html(str);
+$(".button_panel").html(btn_str);
+$(".que:first-child").show();
+
+
+$(".que_btn").click(function(){
+
+  btn_sr_no = $(this).data('btnsrno');
+   $(".que").hide();
+  $(".question_panel").find(`[data-srno='${btn_sr_no}']`).show();
+});
+let currentQuestion = 1;
+
+      $("#prevBtn").click(function () {
+        if (currentQuestion > 1) {
+          currentQuestion--;
+          $(".que").hide();
+          $(".question_panel").find(`[data-srno='${currentQuestion}']`).show();
+        }
+      });
+
+      $("#nextBtn").click(function () {
+        if (currentQuestion < questions.length) {
+          currentQuestion++;
+          $(".que").hide();
+          $(".question_panel").find(`[data-srno='${currentQuestion}']`).show();
+        }
+      });
+
+});
+
+
+</script>
+
+
+</head>
+<body>
+
+<div class="container">
+   <div class="question_panel"></div>
+   <div class="button_panel">
+    <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+   </div>
+</div>
+</body>
+</html>
